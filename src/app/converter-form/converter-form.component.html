@@ -1,0 +1,26 @@
+<div class="mb-3">
+  <form #form="ngForm" (ngSubmit)="submitForm()">
+    <label for="amount" class="form-label">Amount:</label>
+    <input id="amount" class="form-control" type="number" [(ngModel)]="model.amount" name="amount" required>
+    <br>
+    <label for="from" class="form-label">From:</label>
+    <select id="from" class="form-control" [(ngModel)]="model.from" name="from">
+      <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
+    </select>
+    <br>
+    <label for="to" class="form-label">To:</label>
+    <select id="to" class="form-control" [(ngModel)]="model.to" name="to">
+      <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
+    </select>
+    <br><br>
+    <button class="btn btn-primary" [disabled]="form.invalid">Convert</button>
+  </form>
+  <br><br>
+  <ng-container *ngIf="form.submitted">
+    <h2>{{ lastSubmittedModel.amount }} {{ lastSubmittedModel.from }}</h2>
+    <p>is</p>
+    <h2>{{ result.toFixed(precision) }} {{ lastSubmittedModel.to }}</h2>
+    <label for="precision" class="form-label">Precision:</label>
+    <input id="precision" class="form-range" type="range" min="2" max="18" [(ngModel)]="precision" name="precision">
+  </ng-container>
+</div>
