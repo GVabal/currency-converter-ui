@@ -1,6 +1,6 @@
 const express = require('express');
 const compression = require('compression');
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8000;
 
 const buildPath = 'dist/currency-converter-ui';
 
@@ -19,3 +19,4 @@ app.get('*', function (req, res) {
 });
 
 app.listen(PORT);
+console.log('Listening on port ' + PORT);
