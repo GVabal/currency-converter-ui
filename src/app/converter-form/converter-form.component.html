@@ -13,10 +13,11 @@
       <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
     </select>
     <br><br>
-    <button class="btn btn-primary" [disabled]="form.invalid">Convert</button>
+    <button [hidden]="isLoading" class="btn btn-primary" [disabled]="form.invalid">Convert</button>
+    <div [hidden]="!isLoading" class="spin"></div>
   </form>
   <br><br>
-  <ng-container *ngIf="form.submitted">
+  <ng-container *ngIf="showResult">
     <h2>{{ lastSubmittedModel.amount }} {{ lastSubmittedModel.from }}</h2>
     <p>is</p>
     <h2>{{ result.toFixed(precision) }} {{ lastSubmittedModel.to }}</h2>

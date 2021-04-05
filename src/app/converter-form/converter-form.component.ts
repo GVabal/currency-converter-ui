@@ -15,6 +15,8 @@ export class ConverterFormComponent implements OnInit {
   model = {amount: 1 , from: CurrencyType.EUR, to: CurrencyType.USD};
   lastSubmittedModel = {amount: 1 , from: CurrencyType.EUR, to: CurrencyType.USD};
   result = 0;
+  isLoading = false;
+  showResult = false;
 
   constructor(private converterService: CurrencyConverterService) { }
 
@@ -22,7 +24,10 @@ export class ConverterFormComponent implements OnInit {
   }
 
   submitForm(): void {
+    this.isLoading = true;
     this.converterService.convert(this.model).subscribe(result => {
+        this.isLoading = false;
+        this.showResult = true;
         this.result = result;
         this.lastSubmittedModel = {...this.model};
       });
